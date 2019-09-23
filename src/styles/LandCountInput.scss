@@ -10,4 +10,37 @@
   .color-dot {
     margin: 5px;
   }
+
+  .close {
+    opacity: 0.3;
+    transition: all 0.3s;
+  }
+
+  .close {
+    width: 1rem;
+    height: 1rem;
+    opacity: 0.4;
+    margin-left: 1rem;
+  }
+
+  .close:hover {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  .close:before, .close:after {
+    position: absolute;
+    content: ' ';
+    height: 1rem;
+    width: 2px;
+    background-color: #333;
+  }
+
+  .close:before {
+    transform: rotate(45deg);
+  }
+
+  .close:after {
+    transform: rotate(-45deg);
+  }
 }

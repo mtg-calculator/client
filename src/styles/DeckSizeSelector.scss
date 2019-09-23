@@ -1,21 +1,29 @@
 .deck-size-selector {
   display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 0;
 
-}
+  h3 {
+    margin: 1rem;
+  }
 
-input[type=radio] {
-  display: none;
-  margin: 1em;
-}
+  input[type=radio] {
+    display: none;
+  }
 
-input[type=radio] + label {
-  display: inline-block;
-  // margin: -2px;
-  padding: 1rem 3rem;
-  background-color: #e7e7e7;
-}
+  input[type=radio] + label {
+    display: inline-block;
+    // margin: -20px;
+    padding: 0.5rem 3rem;
+    height: 1rem;
+    // border: 1px solid black;
+    background-color: #e7e7e7;
+  }
 
-input[type=radio]:checked + label {
-  background-image: none;
-  background-color: #d0d0d0;
+  input[type=radio]:checked + label {
+    background-image: none;
+    background-color: #555;
+    color: #eee;
+  }
 }

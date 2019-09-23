@@ -41,7 +41,7 @@ export default class LandCountInput extends Component {
           value={this.state.turn}
           onChange={this.onTurnChange}
         />
-
+        <div className="close" onClick={this.props.handleRemoveColor}></div>
       </div>
     )
   }

@@ -23,6 +23,12 @@ export default class InputForm extends Component {
     }
   }
 
+  handleRemoveColor = removedColor => {
+    this.setState(prevState => ({
+      colors: prevState.colors.filter(color => color !== removedColor)
+    }))
+  }
+
   render() {
     return (
       <div className="input-form">
@@ -34,7 +40,7 @@ export default class InputForm extends Component {
           )}
         </div>
 
-        { this.state.colors.map(color => <LandCountInput color={color} key={color} />)}
+        { this.state.colors.map(color => <LandCountInput color={color} handleRemoveColor={() => this.handleRemoveColor(color)} key={color} />)}
 
         <button>Submit</button>
       </div>
