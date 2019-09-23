@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
+import DeckSizeSelector from './DeckSizeSelector';
 import ColorButton from './ColorButton';
+import LandCountInput from './LandCountInput';
 import 'rc-input-number/assets/index.css';
-import InputNumber from 'rc-input-number';
 import '../styles/InputForm.scss';
+import {COLORS} from '../colors.js';
 
 export default class InputForm extends Component {
-  state = {
-    value: 1
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: 1,
+      colors: []
+    }
   }
 
-  onChange = value => {
-    this.setState({ value });
+  handleColorClick = event => {
+    const { color } = event.target.dataset;
+    if (!this.state.colors.includes(color)) {
+      this.setState(prevState => prevState.colors.push(color))
+    }
   }
 
   render() {
     return (
-      <div className="num-input">
-        <h3>Input form</h3>
-        <InputNumber class="custom"
-        min={1}
-        max={6}
-        value={this.state.value}
-        onChange={this.onChange}
-        />
-        <ColorButton color="white" />
+      <div className="input-form">
 
+        <DeckSizeSelector />
+
+        <div className="color-btns">
+          { COLORS.map(color =>  <ColorButton color={color} handleClick={this.handleColorClick} key={color} />
+          )}
+        </div>
+
+        { this.state.colors.map(color => <LandCountInput color={color} key={color} />)}
+
+        <button>Submit</button>
       </div>
     )
   }

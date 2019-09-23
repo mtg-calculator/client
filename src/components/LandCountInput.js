@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ColorButton from './ColorButton';
+import ColorDot from './ColorDot';
 import InputNumber from 'rc-input-number';
 import 'rc-input-number/assets/index.css';
 import '../styles/LandCountInput.scss';
 
 
 export default class LandCountInput extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
 
   constructor() {
     super();
@@ -37,7 +33,7 @@ export default class LandCountInput extends Component {
           value={this.state.count}
           onChange={this.onCountChange}
         />
-        <ColorButton color={this.props.color} />
+        <ColorDot color={this.props.color} />
         <p>needed by turn </p>
         <InputNumber className="input-number turn-needed-input"
           min={1}

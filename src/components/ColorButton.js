@@ -1,10 +1,12 @@
-import React from 'react';
-import '../styles/ColorButton.scss';
+import React, { Component } from 'react';
+import ColorDot from './ColorDot';
 
-function ColorButton(props) {
-  return (
-    <div className={`color-btn ${props.color}`} onClick={() => console.log('clicked ', props.color)} ></div>
-  )
+export default class ColorButton extends Component {
+  render() {
+    return (
+      <div className="color-btn" onClick={this.props.handleClick}>
+        <ColorDot color={this.props.color} />
+      </div>
+    )
+  }
 }
-
-export default ColorButton;
