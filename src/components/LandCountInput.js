@@ -33,8 +33,8 @@ export default class LandCountInput extends Component {
           value={this.state.count}
           onChange={this.onCountChange}
         />
-        <ColorDot color={this.props.color} />
-        <p>needed by turn </p>
+        <ColorDot className="color-dot" color={this.props.color} />
+        <p className="label-text">needed by turn </p>
         <InputNumber className="input-number turn-needed-input"
           min={1}
           max={8}

@@ -1,3 +1,8 @@
 export const COLORS = [
-  'W','U','B','R','G','N'
+  'white',
+  'blue',
+  'black',
+  'red',
+  'green',
+  'colorless'
 ];

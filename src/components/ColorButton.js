@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ColorDot from './ColorDot';
+import '../styles/ColorButton.scss';
 
 export default class ColorButton extends Component {
   render() {

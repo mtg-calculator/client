@@ -1,0 +1,27 @@
+$red: red;
+$blue: blue;
+$white: ivory;
+$black: black;
+$green: green;
+$grey: grey;
+
+.red {
+  background-color: $red;
+}
+
+.blue {
+  background-color: $blue;
+}
+.white {
+  background-color: $white;
+  border: 0.5px solid $grey;
+}
+.black {
+  background-color: $black;
+}
+.green {
+  background-color: $green;
+}
+.colorless {
+  background-color: $grey;
+}
