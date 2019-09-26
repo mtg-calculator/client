@@ -11,39 +11,73 @@ export default class InputForm extends Component {
     super(props);
 
     this.state = {
-      value: 1,
-      colors: []
+      deckSize: null,
+      colors: {},
     }
+  }
+
+  handleDeckSizeSelect = deckSize => {
+    this.setState({ deckSize })
   }
 
   handleColorClick = event => {
     const { color } = event.target.dataset;
-    if (!this.state.colors.includes(color)) {
-      this.setState(prevState => prevState.colors.push(color))
+    if (!this.state.colors[color]) {
+      this.setState({
+        colors: {
+          ...this.state.colors,
+          [color]: { qty: 1, turn: 1 }
+        }
+      });
     }
   }
 
   handleRemoveColor = removedColor => {
+    this.setState(prevState => {
+      const { [removedColor]:value, ...otherColors } = prevState.colors;
+      return { colors: otherColors };
+    });
+  }
+
+  handleLandInputChange = (color, type, num) => {
     this.setState(prevState => ({
-      colors: prevState.colors.filter(color => color !== removedColor)
-    }))
+      colors: {
+        ...prevState.colors,
+        [color]: {
+          ...prevState.colors[color],
+          [type]: num
+        }
+
+      }
+    }));
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log(event.target);
   }
 
   render() {
     return (
-      <div className="input-form">
+      <form className="input-form" onSubmit={this.handleFormSubmit}>
 
-        <DeckSizeSelector />
+        <DeckSizeSelector onChange={this.handleDeckSizeSelect} />
 
         <div className="color-btns">
           { COLORS.map(color =>  <ColorButton color={color} handleClick={this.handleColorClick} key={color} />
           )}
         </div>
 
-        { this.state.colors.map(color => <LandCountInput color={color} handleRemoveColor={() => this.handleRemoveColor(color)} key={color} />)}
+        { Object.keys(this.state.colors).map(color => (
+          <LandCountInput
+            color={color}
+            handleLandInputChange={this.handleLandInputChange}
+            handleRemoveColor={() => this.handleRemoveColor(color)}
+            key={color} />
+        ))}
 
-        <button>Submit</button>
-      </div>
+        <button className="submit">Submit</button>
+      </form>
     )
   }
 }

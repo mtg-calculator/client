@@ -4,5 +4,4 @@ export const COLORS = [
   'black',
   'red',
   'green',
-  'colorless'
 ];

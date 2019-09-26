@@ -18,10 +18,12 @@ export default class LandCountInput extends Component {
 
   onCountChange = count => {
     this.setState({ count });
+    this.props.handleLandInputChange(this.props.color, "qty", count)
   }
 
   onTurnChange = turn => {
     this.setState({ turn });
+    this.props.handleLandInputChange(this.props.color, "turn", turn)
   }
 
   render() {
