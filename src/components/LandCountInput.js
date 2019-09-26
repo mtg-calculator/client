@@ -11,14 +11,14 @@ export default class LandCountInput extends Component {
     super();
 
     this.state = {
-      count: 1,
+      sources: 1,
       turn: 1
     }
   }
 
-  onCountChange = count => {
-    this.setState({ count });
-    this.props.handleLandInputChange(this.props.color, "qty", count)
+  onCountChange = sources => {
+    this.setState({ sources });
+    this.props.handleLandInputChange(this.props.color, "sources", sources);
   }
 
   onTurnChange = turn => {
@@ -28,11 +28,11 @@ export default class LandCountInput extends Component {
 
   render() {
     return (
-      <div className="land-count-input">
-        <InputNumber className="input-number count-needed-input"
+      <div className="land-sources-input">
+        <InputNumber className="input-number sources-needed-input"
           min={1}
           max={6}
-          value={this.state.count}
+          value={this.state.sources}
           onChange={this.onCountChange}
         />
         <ColorDot className="color-dot" color={this.props.color} />

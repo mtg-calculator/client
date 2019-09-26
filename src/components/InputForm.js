@@ -11,7 +11,7 @@ export default class InputForm extends Component {
     super(props);
 
     this.state = {
-      deckSize: null,
+      deckSize: 40,
       colors: {},
     }
   }
@@ -26,7 +26,7 @@ export default class InputForm extends Component {
       this.setState({
         colors: {
           ...this.state.colors,
-          [color]: { qty: 1, turn: 1 }
+          [color]: { sources: 1, turn: 1 }
         }
       });
     }
@@ -39,22 +39,40 @@ export default class InputForm extends Component {
     });
   }
 
-  handleLandInputChange = (color, type, num) => {
+  handleLandInputChange = (color, type, qty) => {
     this.setState(prevState => ({
       colors: {
         ...prevState.colors,
         [color]: {
           ...prevState.colors[color],
-          [type]: num
+          [type]: qty
         }
-
       }
     }));
   }
 
-  handleFormSubmit = event => {
+  handleFormSubmit = async event => {
     event.preventDefault();
-    console.log(event.target);
+    const url = 'https://mtg-calculator-api.herokuapp.com/api/calculate';
+    const formObj = {};
+    Object.keys(this.state.colors).forEach(color => {
+      formObj[color] = {
+        deck_size: this.state.deckSize,
+        achieve_chance: 80,
+        sources: this.state.colors[color].sources,
+        on_turn: this.state.colors[color].turn
+      }
+    });
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formObj)
+    });
+    const answer = await response.json();
+    console.log(answer);
   }
 
   render() {
