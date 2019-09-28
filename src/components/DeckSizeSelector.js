@@ -3,7 +3,7 @@ import '../styles/DeckSizeSelector.scss';
 
 export default class DeckSizeSelector extends Component {
   state = {
-    deckSize: 40,
+    deckSize: null,
   }
 
   handleOptionChange = event => {

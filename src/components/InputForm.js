@@ -4,6 +4,7 @@ import ColorButton from './ColorButton';
 import LandCountInput from './LandCountInput';
 import 'rc-input-number/assets/index.css';
 import '../styles/InputForm.scss';
+import {checkForm, formatSubmission} from '../utils/formUtils';
 import {COLORS} from '../colors.js';
 
 export default class InputForm extends Component {
@@ -11,7 +12,7 @@ export default class InputForm extends Component {
     super(props);
 
     this.state = {
-      deckSize: 40,
+      deckSize: null,
       colors: {},
     }
   }
@@ -54,25 +55,25 @@ export default class InputForm extends Component {
   handleFormSubmit = async event => {
     event.preventDefault();
     const url = 'https://mtg-calculator-api.herokuapp.com/api/calculate';
-    const formObj = {};
-    Object.keys(this.state.colors).forEach(color => {
-      formObj[color] = {
-        deck_size: this.state.deckSize,
-        achieve_chance: 80,
-        sources: this.state.colors[color].sources,
-        on_turn: this.state.colors[color].turn
-      }
-    });
 
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formObj)
-    });
-    const answer = await response.json();
-    console.log(answer);
+    const errors = checkForm(this.state);
+
+    if (Object.keys(errors).length === 0) {
+      const formObj = formatSubmission(this.state);
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formObj)
+      });
+      const answer = await response.json();
+      console.log('Server response: ', answer);
+    } else {
+      // TODO: display error messages to user
+      console.log('Form not submitted: ', errors)
+    }
   }
 
   render() {
