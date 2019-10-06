@@ -81,11 +81,12 @@ const InputForm = () => {
     <form className="input-form" onSubmit={handleFormSubmit}>
 
       <DeckSizeSelector onChange={handleDeckSizeSelect} showError={errors.noDeckSize && submitted}/>
-
-      <div className="color-btns">
-        { COLORS.map(color =>  <ColorButton color={color} handleClick={handleColorClick} key={color} />
-        )}
-      <ErrorMessage showError={errors.noColors && submitted} msg="You need to select at least one color"/>
+      <div className="input-wrapper">
+        <div className="color-btns">
+          { COLORS.map(color =>  <ColorButton color={color} handleClick={handleColorClick} key={color} />
+          )}
+          </div>
+        <ErrorMessage showError={errors.noColors && submitted} msg="You need to select at least one color"/>
       </div>
 
       { Object.keys(colors).map(color => (
