@@ -1,50 +1,44 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import ColorDot from './ColorDot';
 import InputNumber from 'rc-input-number';
 import 'rc-input-number/assets/index.css';
 import '../styles/LandCountInput.scss';
 
+const LandCountInput = props => {
+  const { handleLandInputChange, handleRemoveColor, color } = props;
 
-export default class LandCountInput extends Component {
+  const [sourceCount, setSourceCount] = useState(1);
+  const [turn, setTurn] = useState(1);
 
-  constructor() {
-    super();
-
-    this.state = {
-      sources: 1,
-      turn: 1
-    }
+  const onCountChange = sources => {
+    setSourceCount(sources);
+    handleLandInputChange(color, "sources", sources);
   }
 
-  onCountChange = sources => {
-    this.setState({ sources });
-    this.props.handleLandInputChange(this.props.color, "sources", sources);
+  const onTurnChange = turn => {
+    setTurn(turn);
+    handleLandInputChange(color, "turn", turn);
   }
 
-  onTurnChange = turn => {
-    this.setState({ turn });
-    this.props.handleLandInputChange(this.props.color, "turn", turn)
-  }
-
-  render() {
-    return (
-      <div className="land-sources-input">
-        <InputNumber className="input-number sources-needed-input"
-          min={1}
-          max={6}
-          value={this.state.sources}
-          onChange={this.onCountChange}
-        />
-        <ColorDot className="color-dot" color={this.props.color} />
-        <p className="label-text">needed by turn </p>
-        <InputNumber className="input-number turn-needed-input"
-          min={1}
-          max={8}
-          value={this.state.turn}
-          onChange={this.onTurnChange}
-        />
-        <div className="close" onClick={this.props.handleRemoveColor}></div>
-      </div>
-    )
-  }
+  return (
+    <div className="land-sources-input">
+      <InputNumber className="input-number sources-needed-input"
+        min={1}
+        max={6}
+        value={sourceCount}
+        onChange={onCountChange}
+      />
+      <ColorDot className="color-dot" color={color} />
+      <p className="label-text">needed by turn </p>
+      <InputNumber className="input-number turn-needed-input"
+        min={1}
+        max={8}
+        value={turn}
+        onChange={onTurnChange}
+      />
+      <div className="close" onClick={handleRemoveColor}></div>
+    </div>
+  );
 }
+
+export default LandCountInput;
