@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/ErrorMessage.scss';
 
-
-const ErrorMessage = ({msg}) => <p className={msg ? '' : 'hidden'}>{msg || 'Error message goes here'}</p>
+const ErrorMessage = ({msg, showError}) => <p className={showError ? '' : 'hidden'}>{msg || 'Error'}</p>
 
 export default ErrorMessage;

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/DeckSizeSelector.scss';
+import ErrorMessage from './ErrorMessage';
 
-const DeckSizeSelector = ({onChange}) => {
+const DeckSizeSelector = ({onChange, showError}) => {
   const [deckSize, setDeckSize] = useState(null);
 
   const handleOptionChange = event => {
@@ -20,6 +21,7 @@ const DeckSizeSelector = ({onChange}) => {
       <label htmlFor="60-deck">60</label>
       <input type="radio" id="100-deck" name="deck-size" value="100" checked={deckSize === 100} onChange={handleOptionChange}/>
       <label htmlFor="100-deck">100</label>
+      <ErrorMessage msg="You need to select a deck size" showError={showError}  />
     </div>
   )
 }
