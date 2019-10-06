@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import DeckSizeSelector from './DeckSizeSelector';
 import ColorsSelector from './ColorsSelector';
-import LandCountInput from './LandCountInput';
+import LandInput from './LandInput';
+import LandInputsField from './LandInputsField';
 import 'rc-input-number/assets/index.css';
 import '../styles/InputForm.scss';
 import {checkForm, formatSubmission} from '../utils/formUtils';
@@ -15,7 +16,6 @@ const InputForm = () => {
   useEffect(() => {
     setErrors(checkForm({deckSize,colors}));
   }, [deckSize, colors])
-
 
   const handleDeckSizeSelect = deckSize => {
     setDeckSize(deckSize);
@@ -78,16 +78,7 @@ const InputForm = () => {
 
   return (
     <form className="input-form" onSubmit={handleFormSubmit}>
-
       <DeckSizeSelector onChange={handleDeckSizeSelect} showError={errors.noDeckSize && submitted}/>
-
-      {/* <div className="input-wrapper">
-        <div className="color-btns">
-          { COLORS.map(color =>  <ColorButton color={color} handleClick={handleColorClick} key={color} />
-          )}
-          </div>
-        <ErrorMessage showError={errors.noColors && submitted} msg="You need to select at least one color"/>
-      </div> */}
 
       <ColorsSelector
         handleColorClick={handleColorClick}
@@ -95,15 +86,13 @@ const InputForm = () => {
         submitted={submitted}
       />
 
-      { Object.keys(colors).map(color => (
-        <LandCountInput
-          color={color}
-          handleLandInputChange={handleLandInputChange}
-          handleRemoveColor={() => handleRemoveColor(color)}
-          showError={errors.colorCount && errors.colorCount.includes(color) && submitted}
-          msg="Required quantity cannot exceed turn number"
-          key={color} />
-      ))}
+      <LandInputsField
+        colors={colors}
+        handleLandInputChange={handleLandInputChange}
+        handleRemoveColor={handleRemoveColor}
+        errors={errors}
+        submitted={submitted}
+      />
 
       <button className="submit">Submit</button>
     </form>

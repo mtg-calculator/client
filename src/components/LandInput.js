@@ -5,7 +5,7 @@ import 'rc-input-number/assets/index.css';
 import '../styles/LandCountInput.scss';
 import ErrorMessage from './ErrorMessage';
 
-const LandCountInput = props => {
+const LandInput = props => {
   const { handleLandInputChange, handleRemoveColor, color, msg, showError } = props;
 
   const [sourceCount, setSourceCount] = useState(1);
@@ -45,4 +45,4 @@ const LandCountInput = props => {
   );
 }
 
-export default LandCountInput;
+export default LandInput;
