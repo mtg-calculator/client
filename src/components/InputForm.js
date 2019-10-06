@@ -14,6 +14,11 @@ const InputForm = () => {
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
+  useEffect(() => {
+    setErrors(checkForm({deckSize,colors}));
+  }, [deckSize, colors])
+
+
   const handleDeckSizeSelect = deckSize => {
     setDeckSize(deckSize);
   }
@@ -44,10 +49,6 @@ const InputForm = () => {
       }
     }))
   }
-
-  useEffect(() => {
-    setErrors(checkForm({deckSize,colors}));
-  }, [deckSize, colors])
 
   const handleFormSubmit = async event => {
     event.preventDefault();
@@ -92,6 +93,8 @@ const InputForm = () => {
           color={color}
           handleLandInputChange={handleLandInputChange}
           handleRemoveColor={() => handleRemoveColor(color)}
+          showError={errors.colorCount && errors.colorCount.includes(color) && submitted}
+          msg="Required quantity cannot exceed turn number"
           key={color} />
       ))}
 
