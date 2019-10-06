@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import DeckSizeSelector from './DeckSizeSelector';
-import ColorButton from './ColorButton';
+import ColorsSelector from './ColorsSelector';
 import LandCountInput from './LandCountInput';
 import 'rc-input-number/assets/index.css';
 import '../styles/InputForm.scss';
 import {checkForm, formatSubmission} from '../utils/formUtils';
-import {COLORS} from '../colors.js';
-import ErrorMessage from './ErrorMessage';
 
 const InputForm = () => {
   const [deckSize, setDeckSize] = useState(null);
@@ -25,6 +23,7 @@ const InputForm = () => {
 
   const handleColorClick = event => {
     const { color } = event.target.dataset;
+    console.log(color)
     if (!colors[color]) {
       setColors({
         ...colors,
@@ -81,13 +80,20 @@ const InputForm = () => {
     <form className="input-form" onSubmit={handleFormSubmit}>
 
       <DeckSizeSelector onChange={handleDeckSizeSelect} showError={errors.noDeckSize && submitted}/>
-      <div className="input-wrapper">
+
+      {/* <div className="input-wrapper">
         <div className="color-btns">
           { COLORS.map(color =>  <ColorButton color={color} handleClick={handleColorClick} key={color} />
           )}
           </div>
         <ErrorMessage showError={errors.noColors && submitted} msg="You need to select at least one color"/>
-      </div>
+      </div> */}
+
+      <ColorsSelector
+        handleColorClick={handleColorClick}
+        errors={errors}
+        submitted={submitted}
+      />
 
       { Object.keys(colors).map(color => (
         <LandCountInput
