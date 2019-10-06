@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DeckSizeSelector from './DeckSizeSelector';
 import ColorButton from './ColorButton';
 import LandCountInput from './LandCountInput';
@@ -6,10 +6,18 @@ import 'rc-input-number/assets/index.css';
 import '../styles/InputForm.scss';
 import {checkForm, formatSubmission} from '../utils/formUtils';
 import {COLORS} from '../colors.js';
+import ErrorMessage from './ErrorMessage';
 
 const InputForm = () => {
   const [deckSize, setDeckSize] = useState(null);
   const [colors, setColors] = useState({});
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setErrors(checkForm({deckSize,colors}));
+  }, [deckSize, colors])
+
 
   const handleDeckSizeSelect = deckSize => {
     setDeckSize(deckSize);
@@ -45,10 +53,12 @@ const InputForm = () => {
   const handleFormSubmit = async event => {
     event.preventDefault();
     const url = 'https://mtg-calculator-api.herokuapp.com/api/calculate';
+    setSubmitted(true);
 
-    const errors = checkForm({deckSize, colors});
-
-    if (Object.keys(errors).length === 0) {
+    const formErrors = checkForm({deckSize, colors});
+    setErrors(formErrors);
+    console.log('errors: ', Object.keys(formErrors).length);
+    if (Object.keys(formErrors).length === 0) {
       const formObj = formatSubmission({deckSize, colors});
       console.log(formObj);
 
@@ -70,11 +80,12 @@ const InputForm = () => {
   return (
     <form className="input-form" onSubmit={handleFormSubmit}>
 
-      <DeckSizeSelector onChange={handleDeckSizeSelect} />
+      <DeckSizeSelector onChange={handleDeckSizeSelect} showError={errors.noDeckSize && submitted}/>
 
       <div className="color-btns">
         { COLORS.map(color =>  <ColorButton color={color} handleClick={handleColorClick} key={color} />
         )}
+      <ErrorMessage showError={errors.noColors && submitted} msg="You need to select at least one color"/>
       </div>
 
       { Object.keys(colors).map(color => (
@@ -82,6 +93,8 @@ const InputForm = () => {
           color={color}
           handleLandInputChange={handleLandInputChange}
           handleRemoveColor={() => handleRemoveColor(color)}
+          showError={errors.colorCount && errors.colorCount.includes(color) && submitted}
+          msg="Required quantity cannot exceed turn number"
           key={color} />
       ))}
 

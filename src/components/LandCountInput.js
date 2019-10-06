@@ -3,9 +3,10 @@ import ColorDot from './ColorDot';
 import InputNumber from 'rc-input-number';
 import 'rc-input-number/assets/index.css';
 import '../styles/LandCountInput.scss';
+import ErrorMessage from './ErrorMessage';
 
 const LandCountInput = props => {
-  const { handleLandInputChange, handleRemoveColor, color } = props;
+  const { handleLandInputChange, handleRemoveColor, color, msg, showError } = props;
 
   const [sourceCount, setSourceCount] = useState(1);
   const [turn, setTurn] = useState(1);
@@ -37,6 +38,7 @@ const LandCountInput = props => {
         onChange={onTurnChange}
       />
       <div className="close" onClick={handleRemoveColor}></div>
+      <ErrorMessage msg={msg} showError={showError} />
     </div>
   );
 }
