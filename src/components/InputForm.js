@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import DeckSizeSelector from './DeckSizeSelector';
 import ColorButton from './ColorButton';
 import LandCountInput from './LandCountInput';
@@ -7,59 +7,50 @@ import '../styles/InputForm.scss';
 import {checkForm, formatSubmission} from '../utils/formUtils';
 import {COLORS} from '../colors.js';
 
-export default class InputForm extends Component {
-  constructor(props) {
-    super(props);
+const InputForm = () => {
+  const [deckSize, setDeckSize] = useState(null);
+  const [colors, setColors] = useState({});
 
-    this.state = {
-      deckSize: null,
-      colors: {},
-    }
+  const handleDeckSizeSelect = deckSize => {
+    setDeckSize(deckSize);
   }
 
-  handleDeckSizeSelect = deckSize => {
-    this.setState({ deckSize })
-  }
-
-  handleColorClick = event => {
+  const handleColorClick = event => {
     const { color } = event.target.dataset;
-    if (!this.state.colors[color]) {
-      this.setState({
-        colors: {
-          ...this.state.colors,
-          [color]: { sources: 1, turn: 1 }
-        }
+    if (!colors[color]) {
+      setColors({
+        ...colors,
+        [color]: { sources: 1, turn: 1}
       });
     }
   }
 
-  handleRemoveColor = removedColor => {
-    this.setState(prevState => {
-      const { [removedColor]:value, ...otherColors } = prevState.colors;
-      return { colors: otherColors };
+  const handleRemoveColor = removedColor => {
+    setColors(prevColors => {
+      const { [removedColor]: value, ...otherColors } = prevColors;
+      return otherColors ;
     });
   }
 
-  handleLandInputChange = (color, type, qty) => {
-    this.setState(prevState => ({
-      colors: {
-        ...prevState.colors,
-        [color]: {
-          ...prevState.colors[color],
-          [type]: qty
-        }
+  const handleLandInputChange = (color, type, qty) => {
+    setColors(prevColors => ({
+      ...prevColors,
+      [color]: {
+        ...prevColors[color],
+        [type]: qty
       }
-    }));
+    }))
   }
 
-  handleFormSubmit = async event => {
+  const handleFormSubmit = async event => {
     event.preventDefault();
     const url = 'https://mtg-calculator-api.herokuapp.com/api/calculate';
 
-    const errors = checkForm(this.state);
+    const errors = checkForm({deckSize, colors});
 
     if (Object.keys(errors).length === 0) {
-      const formObj = formatSubmission(this.state);
+      const formObj = formatSubmission({deckSize, colors});
+      console.log(formObj);
 
       const response = await fetch(url, {
         method: 'POST',
@@ -76,27 +67,27 @@ export default class InputForm extends Component {
     }
   }
 
-  render() {
-    return (
-      <form className="input-form" onSubmit={this.handleFormSubmit}>
+  return (
+    <form className="input-form" onSubmit={handleFormSubmit}>
 
-        <DeckSizeSelector onChange={this.handleDeckSizeSelect} />
+      <DeckSizeSelector onChange={handleDeckSizeSelect} />
 
-        <div className="color-btns">
-          { COLORS.map(color =>  <ColorButton color={color} handleClick={this.handleColorClick} key={color} />
-          )}
-        </div>
+      <div className="color-btns">
+        { COLORS.map(color =>  <ColorButton color={color} handleClick={handleColorClick} key={color} />
+        )}
+      </div>
 
-        { Object.keys(this.state.colors).map(color => (
-          <LandCountInput
-            color={color}
-            handleLandInputChange={this.handleLandInputChange}
-            handleRemoveColor={() => this.handleRemoveColor(color)}
-            key={color} />
-        ))}
+      { Object.keys(colors).map(color => (
+        <LandCountInput
+          color={color}
+          handleLandInputChange={handleLandInputChange}
+          handleRemoveColor={() => handleRemoveColor(color)}
+          key={color} />
+      ))}
 
-        <button className="submit">Submit</button>
-      </form>
-    )
-  }
+      <button className="submit">Submit</button>
+    </form>
+  );
 }
+
+export default InputForm;
