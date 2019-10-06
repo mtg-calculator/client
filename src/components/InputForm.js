@@ -84,7 +84,7 @@ const InputForm = () => {
       <div className="color-btns">
         { COLORS.map(color =>  <ColorButton color={color} handleClick={handleColorClick} key={color} />
         )}
-      <ErrorMessage />
+      <ErrorMessage showError={errors.noColors && submitted} msg="You need to select at least one color"/>
       </div>
 
       { Object.keys(colors).map(color => (
