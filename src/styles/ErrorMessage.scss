@@ -1,3 +1,13 @@
+.error {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  color: red;
+  font-size: .75rem;
+}
+
 .hidden {
   display: none;
 }

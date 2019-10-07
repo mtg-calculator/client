@@ -5,7 +5,7 @@ import 'rc-input-number/assets/index.css';
 import '../styles/LandCountInput.scss';
 import ErrorMessage from './ErrorMessage';
 
-const LandCountInput = props => {
+const LandInput = props => {
   const { handleLandInputChange, handleRemoveColor, color, msg, showError } = props;
 
   const [sourceCount, setSourceCount] = useState(1);
@@ -22,25 +22,27 @@ const LandCountInput = props => {
   }
 
   return (
-    <div className="land-sources-input">
-      <InputNumber className="input-number sources-needed-input"
-        min={1}
-        max={6}
-        value={sourceCount}
-        onChange={onCountChange}
-      />
-      <ColorDot className="color-dot" color={color} />
-      <p className="label-text">needed by turn </p>
-      <InputNumber className="input-number turn-needed-input"
-        min={1}
-        max={8}
-        value={turn}
-        onChange={onTurnChange}
-      />
-      <div className="close" onClick={handleRemoveColor}></div>
+    <div className="input-wrapper">
+      <div className="land-sources-input">
+        <InputNumber className="input-number sources-needed-input"
+          min={1}
+          max={6}
+          value={sourceCount}
+          onChange={onCountChange}
+        />
+        <ColorDot className="color-dot" color={color} />
+        <p className="label-text">needed by turn </p>
+        <InputNumber className="input-number turn-needed-input"
+          min={1}
+          max={8}
+          value={turn}
+          onChange={onTurnChange}
+        />
+        <div className="close" onClick={handleRemoveColor}></div>
+        </div>
       <ErrorMessage msg={msg} showError={showError} />
     </div>
   );
 }
 
-export default LandCountInput;
+export default LandInput;
