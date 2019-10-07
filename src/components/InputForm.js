@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DeckSizeSelector from './DeckSizeSelector';
 import ColorsSelector from './ColorsSelector';
-import LandInput from './LandInput';
 import LandInputsField from './LandInputsField';
 import 'rc-input-number/assets/index.css';
 import '../styles/InputForm.scss';

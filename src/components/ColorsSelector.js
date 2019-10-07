@@ -11,7 +11,7 @@ const ColorsSelector = ({handleColorClick, errors, submitted}) => {
       { COLORS.map(color =>  <ColorButton color={color} handleClick={handleColorClick} key={color} />
       )}
       </div>
-    <ErrorMessage showError={errors.noColors && submitted} msg="You need to select at least one color"/>
+    <ErrorMessage showError={errors.noColors && submitted} msg="At least one color must be selected"/>
   </div>
   );
 }

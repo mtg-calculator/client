@@ -23,7 +23,7 @@ const DeckSizeSelector = ({onChange, showError}) => {
         <input type="radio" id="100-deck" name="deck-size" value="100" checked={deckSize === 100} onChange={handleOptionChange}/>
         <label htmlFor="100-deck">100</label>
       </div>
-      <ErrorMessage msg="You need to select a deck size" showError={showError}  />
+      <ErrorMessage msg="Must select a deck size" showError={showError}  />
     </div>
   )
 }
