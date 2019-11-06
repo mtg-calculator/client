@@ -26,6 +26,11 @@
     padding-bottom: 1rem;
     padding: 10px;
   }
+
+  .loader {
+    height: 25vh;
+    width: auto;
+    object-fit: cover;
+    object-position: 50% 35%;
+  }
 }
-
-
