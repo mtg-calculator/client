@@ -13,24 +13,28 @@ import { COLOR_CODES } from '../colors.js';
 
 const ResultSlider = ({data, color}) => {
   console.log("Data: ", {data, color})
+  const [value, setValue] = useState(0);
+
   // const [deckSize, setDeckSize] = useState(null);
   // const [colors, setColors] = useState({});
-  // const [errors, setErrors] = useState({});
-  // const [submitted, setSubmitted] = useState(false);
-  // const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
   //   setErrors(checkForm({ deckSize, colors }));
   // }, [deckSize, colors]);
+const handleChange = value => {
+  setValue(value);
+}
 
 
   return (
     <div className="result-slider">
+      <p>Value: {value}</p>
       <Slider
        defaultValue={0}
        color={COLOR_CODES[color]}
        min={0}
        max={12}
+       onChange={handleChange}
       />
     </div>
   )
