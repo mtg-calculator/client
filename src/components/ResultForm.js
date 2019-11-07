@@ -1,4 +1,5 @@
 import React from 'react';
+import ResultSlider from './ResultSlider';
 
 const ResultForm = props => {
   console.log('Server response: ', props.results);
@@ -25,6 +26,7 @@ const ResultForm = props => {
   return (
     <section>
       <div>{items}</div>
+      { Object.keys(props.results).map(result => <ResultSlider data={result} key={result.color} />)}
       <button onClick={props.onReset}>Reset</button>
     </section>
   );
