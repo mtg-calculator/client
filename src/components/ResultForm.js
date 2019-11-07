@@ -1,5 +1,6 @@
 import React from 'react';
 import ResultSlider from './ResultSlider';
+import ColorDot from './ColorDot';
 
 const ResultForm = ({results, onReset}) => {
   console.log('Server response: ', results);
@@ -17,7 +18,7 @@ const ResultForm = ({results, onReset}) => {
 
     items.push(
       <section key={color}>
-        <div>{color}</div>
+        <ColorDot color={color} shape="untapped" count={3} />
         <div>{landString}</div>
       </section>
     );
