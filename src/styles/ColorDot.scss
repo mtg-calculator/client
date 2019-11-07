@@ -1,8 +1,41 @@
 @import 'colors';
 
-.color-dot{
+.color-dot {
   display: inline-block;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
+}
+
+.color-untapped {
+  display: inline-block;
+  width: 1.4rem;
+  height: 2rem;
+  border-radius: 5%;
+  border: solid rgb(21, 11, 0) 0.15rem;
+}
+
+.color-tapped {
+  display: inline-block;
+  width: 2rem;
+  height: 1.4rem;
+  border-radius: 5%;
+  border: solid rgb(21, 11, 0) 0.15rem;
+}
+
+.stack {
+  display: inline-block;
+  position: relative;
+}
+
+.second {
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+}
+
+.third {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
 }

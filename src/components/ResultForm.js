@@ -1,4 +1,5 @@
 import React from 'react';
+import ColorDot from './ColorDot';
 
 const ResultForm = props => {
   console.log('Server response: ', props.results);
@@ -16,7 +17,7 @@ const ResultForm = props => {
 
     items.push(
       <section key={color}>
-        <div>{color}</div>
+        <ColorDot color={color} shape="untapped" count={3} />
         <div>{landString}</div>
       </section>
     );
