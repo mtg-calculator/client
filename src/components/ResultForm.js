@@ -1,16 +1,17 @@
 import React from 'react';
+import ResultSlider from './ResultSlider';
 import ColorDot from './ColorDot';
 
-const ResultForm = props => {
-  console.log('Server response: ', props.results);
+const ResultForm = ({results, onReset}) => {
+  console.log('Server response: ', results);
 
   const items = [];
 
-  Object.keys(props.results).forEach(color => {
+  Object.keys(results).forEach(color => {
     let landString = 'Tapped:Untapped; ';
-    for (let i = 0; i < props.results[color].length; i++) {
-      if (props.results[color][i]) {
-        landString = `${landString} ${i}:${props.results[color][i]}, `;
+    for (let i = 0; i < results[color].length; i++) {
+      if (results[color][i]) {
+        landString = `${landString} ${i}:${results[color][i]}, `;
       }
     }
     landString = landString.slice(0, -2);
@@ -26,7 +27,8 @@ const ResultForm = props => {
   return (
     <section>
       <div>{items}</div>
-      <button onClick={props.onReset}>Reset</button>
+      { Object.keys(results).map(result => <ResultSlider data={results[result]} color={result} key={result.color} />)}
+      <button onClick={onReset}>Reset</button>
     </section>
   );
 };
