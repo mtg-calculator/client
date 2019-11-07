@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import Slider, {Range} from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import { Slider } from 'material-ui-slider';
+import '../styles/ResultSlider.scss';
+import { COLOR_CODES } from '../colors.js';
+
 // import DeckSizeSelector from './DeckSizeSelector';
 // import ColorsSelector from './ColorsSelector';
 // import LandInputsField from './LandInputsField';
@@ -9,8 +11,8 @@ import 'rc-slider/assets/index.css';
 // import '../styles/InputForm.scss';
 // import { checkForm, formatSubmission } from '../utils/formUtils';
 
-const ResultSlider = props => {
-  console.log("Data: ", props.data)
+const ResultSlider = ({data, color}) => {
+  console.log("Data: ", {data, color})
   // const [deckSize, setDeckSize] = useState(null);
   // const [colors, setColors] = useState({});
   // const [errors, setErrors] = useState({});
@@ -23,8 +25,13 @@ const ResultSlider = props => {
 
 
   return (
-    <div>
-      <Slider />
+    <div className="result-slider">
+      <Slider
+       defaultValue={0}
+       color={COLOR_CODES[color]}
+       min={0}
+       max={12}
+      />
     </div>
   )
 };

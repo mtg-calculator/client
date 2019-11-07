@@ -26,6 +26,7 @@ const ResultForm = ({results, onReset}) => {
   return (
     <section>
       <div>{items}</div>
+      { Object.keys(results).map(result => <ResultSlider data={results[result]} color={result} key={result.color} />)}
       <button onClick={onReset}>Reset</button>
     </section>
   );
