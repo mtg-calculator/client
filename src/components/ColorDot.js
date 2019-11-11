@@ -6,20 +6,28 @@ function ColorDot(props) {
   if (props.shape) {
     shape = props.shape;
   }
+  let count = 1;
+  if (props.count || props.count === 0) {
+    count = props.count;
+  }
+  let visible = '';
+  if (count <= 0) {
+    visible = 'invisible';
+  }
 
   return (
-    <div className="stack">
+    <div className={`stack ${visible}`}>
       <div
         className={`color-${shape} ${props.color}`}
         data-color={props.color}
       ></div>
-      {props.count >= 2 && (
+      {count >= 2 && (
         <div
           className={`color-${shape} ${props.color} second`}
           data-color={props.color}
         ></div>
       )}
-      {props.count > 2 && (
+      {count > 2 && (
         <div
           className={`color-${shape} ${props.color} third`}
           data-color={props.color}
