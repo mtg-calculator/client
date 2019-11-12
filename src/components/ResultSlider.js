@@ -6,6 +6,10 @@ import '../styles/ResultSlider.scss';
 // import { makeStyles } from '@material-ui/core/styles;'
 import { COLOR_CODES } from '../colors.js';
 
+// const useStyles = makeStyles({
+
+// })
+
 const ResultSlider = ({ data, color }) => {
   console.log('Data: ', { data, color });
   const [tapped, setTapped] = useState(0);
@@ -26,8 +30,6 @@ const ResultSlider = ({ data, color }) => {
       return data[numTapped];
     }
     return getUntappedValue(numTapped - 1);
-    // console.log(numTapped);
-    // return numTapped;
   };
 
   return (
@@ -48,9 +50,8 @@ const ResultSlider = ({ data, color }) => {
       <Slider
         defaultValue={0}
         marks={marks}
-        valueLabelDisplay="on"
+        valueLabelDisplay="auto"
         max={marks[marks.length - 1].value}
-        step={null}
         onChange={handleChange}
       />
       <p>Tapped: {tapped}</p>
