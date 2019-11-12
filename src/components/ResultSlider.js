@@ -16,7 +16,7 @@ const ResultSlider = ({ data, color }) => {
 
   console.log('marks: ', marks);
 
-  const handleChange = value => {
+  const handleChange = (event, value) => {
     setTapped(value);
   };
 
@@ -26,6 +26,8 @@ const ResultSlider = ({ data, color }) => {
       return data[numTapped];
     }
     return getUntappedValue(numTapped - 1);
+    // console.log(numTapped);
+    // return numTapped;
   };
 
   return (
@@ -49,6 +51,7 @@ const ResultSlider = ({ data, color }) => {
         valueLabelDisplay="on"
         max={marks[marks.length - 1].value}
         step={null}
+        onChange={handleChange}
       />
       <p>Tapped: {tapped}</p>
       <ColorDot color={color} shape="tapped" count={tapped} />
