@@ -7,12 +7,17 @@ import { COLOR_CODES } from '../colors.js';
 
 const useStyles = makeStyles({
  slider: ({color}) => ({
-   color: COLOR_CODES[color]
- })
+   color: COLOR_CODES[color],
+   marginTop: '1rem'
+ }),
+ stacks: {
+   display: 'flex',
+   justifyContent: 'space-between',
+
+ }
 })
 
 const ResultSlider = ({ data, color }) => {
-  console.log('Data: ', { data, color });
   const [tapped, setTapped] = useState(0);
   const marks = data.reduce((accum, curr, i) => {
     if (curr !== null) accum.push({ value: i, label: i });
@@ -34,22 +39,29 @@ const ResultSlider = ({ data, color }) => {
   const classes = useStyles({color});
   return (
     <div className="result-slider">
-      <p>Untapped: {getUntappedValue(tapped)}</p>
-      <ColorDot
-        color={color}
-        shape="untapped"
-        count={getUntappedValue(tapped)}
-      />
+      <div className={`${classes.stacks}`}>
+        <div>
+          <p>Untapped: {getUntappedValue(tapped)}</p>
+          <ColorDot
+            color={color}
+            shape="untapped"
+            count={getUntappedValue(tapped)}
+          />
+        </div>
+        <div>
+          <p>Tapped: {tapped}</p>
+          <ColorDot color={color} shape="tapped" count={tapped} />
+        </div>
+      </div>
       <Slider
         className={`${classes.slider}`}
         defaultValue={0}
         marks={marks}
-        valueLabelDisplay="auto"
+        valueLabelDisplay="off"
         max={marks[marks.length - 1].value}
         onChange={handleChange}
       />
-      <p>Tapped: {tapped}</p>
-      <ColorDot color={color} shape="tapped" count={tapped} />
+
     </div>
   );
 };
