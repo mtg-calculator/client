@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { Slider } from 'material-ui-slider';
 import ColorDot from './ColorDot';
 import Slider from '@material-ui/core/Slider';
 import '../styles/ResultSlider.scss';
@@ -19,8 +18,6 @@ const ResultSlider = ({ data, color }) => {
     if (curr !== null) accum.push({ value: i, label: i });
     return accum;
   }, []);
-
-  console.log('marks: ', marks);
 
   const handleChange = (event, value) => {
     setTapped(value);
@@ -43,13 +40,6 @@ const ResultSlider = ({ data, color }) => {
         shape="untapped"
         count={getUntappedValue(tapped)}
       />
-      {/* <Slider
-        defaultValue={0}
-        color={COLOR_CODES[color]}
-        min={0}
-        max={data.length - 1}
-        onChange={handleChange}
-      /> */}
       <Slider
         className={`${classes.slider}`}
         defaultValue={0}
