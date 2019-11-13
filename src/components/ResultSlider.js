@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
-import { Slider } from 'material-ui-slider';
 import ColorDot from './ColorDot';
+import Slider from '@material-ui/core/Slider';
 import '../styles/ResultSlider.scss';
+import { makeStyles } from '@material-ui/core/styles';
 import { COLOR_CODES } from '../colors.js';
 
-const ResultSlider = ({ data, color }) => {
-  console.log('Data: ', { data, color });
-  const [tapped, setTapped] = useState(0);
+const useStyles = makeStyles({
+ slider: ({color}) => ({
+   color: COLOR_CODES[color],
+   marginTop: '1rem'
+ }),
+ stacks: {
+   display: 'flex',
+   justifyContent: 'space-between',
 
-  const handleChange = value => {
+ }
+})
+
+const ResultSlider = ({ data, color }) => {
+  const [tapped, setTapped] = useState(0);
+  const marks = data.reduce((accum, curr, i) => {
+    if (curr !== null) accum.push({ value: i, label: i });
+    return accum;
+  }, []);
+
+  const handleChange = (event, value) => {
     setTapped(value);
   };
 
@@ -20,23 +36,32 @@ const ResultSlider = ({ data, color }) => {
     return getUntappedValue(numTapped - 1);
   };
 
+  const classes = useStyles({color});
   return (
     <div className="result-slider">
-      <p>Untapped: {getUntappedValue(tapped)}</p>
-      <ColorDot
-        color={color}
-        shape="untapped"
-        count={getUntappedValue(tapped)}
-      />
+      <div className={`${classes.stacks}`}>
+        <div>
+          <p>Untapped: {getUntappedValue(tapped)}</p>
+          <ColorDot
+            color={color}
+            shape="untapped"
+            count={getUntappedValue(tapped)}
+          />
+        </div>
+        <div>
+          <p>Tapped: {tapped}</p>
+          <ColorDot color={color} shape="tapped" count={tapped} />
+        </div>
+      </div>
       <Slider
+        className={`${classes.slider}`}
         defaultValue={0}
-        color={COLOR_CODES[color]}
-        min={0}
-        max={data.length - 1}
+        marks={marks}
+        valueLabelDisplay="off"
+        max={marks[marks.length - 1].value}
         onChange={handleChange}
       />
-      <p>Tapped: {tapped}</p>
-      <ColorDot color={color} shape="tapped" count={tapped} />
+
     </div>
   );
 };
