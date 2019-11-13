@@ -8,10 +8,10 @@ export const COLORS = [
 ];
 
 export const COLOR_CODES = {
-  white: '#eeeeee',
-  blue: '#2196f3',
-  black: '#323232',
-  red: '#f44336',
-  green: '#4caf50',
-  colorless: '#bdbdbd'
+  white: '#f8e7b9',
+  blue: '#0e68ab',
+  black: '#645a55',
+  red: '#d3202a',
+  green: '#00733e',
+  colorless: '#d9d5d4'
 }

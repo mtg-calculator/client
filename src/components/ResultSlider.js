@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import ColorDot from './ColorDot';
 import Slider from '@material-ui/core/Slider';
 import '../styles/ResultSlider.scss';
-// import { makeStyles } from '@material-ui/core/styles;'
+import { makeStyles } from '@material-ui/core/styles';
 import { COLOR_CODES } from '../colors.js';
 
-// const useStyles = makeStyles({
-
-// })
+const useStyles = makeStyles({
+ slider: ({color}) => ({
+   color: COLOR_CODES[color]
+ })
+})
 
 const ResultSlider = ({ data, color }) => {
   console.log('Data: ', { data, color });
@@ -32,6 +34,7 @@ const ResultSlider = ({ data, color }) => {
     return getUntappedValue(numTapped - 1);
   };
 
+  const classes = useStyles({color});
   return (
     <div className="result-slider">
       <p>Untapped: {getUntappedValue(tapped)}</p>
@@ -48,6 +51,7 @@ const ResultSlider = ({ data, color }) => {
         onChange={handleChange}
       /> */}
       <Slider
+        className={`${classes.slider}`}
         defaultValue={0}
         marks={marks}
         valueLabelDisplay="auto"
