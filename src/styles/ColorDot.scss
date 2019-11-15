@@ -28,8 +28,10 @@
   position: relative;
 }
 
-.invisible {
-  visibility: hidden;
+.invisible > * {
+  border: dashed rgb(21, 11, 0) 0.15rem;
+  color: transparent;
+  background-color: transparent;
 }
 
 .second {

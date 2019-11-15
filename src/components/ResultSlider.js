@@ -6,21 +6,23 @@ import { makeStyles } from '@material-ui/core/styles';
 import { COLOR_CODES } from '../colors.js';
 
 const useStyles = makeStyles({
- slider: ({color}) => ({
-   color: COLOR_CODES[color],
-   marginTop: '1rem'
- }),
- stacks: {
-   display: 'flex',
-   justifyContent: 'space-between',
-
- }
-})
+  slider: ({ color }) => ({
+    color: COLOR_CODES[color],
+    marginTop: '1rem'
+  }),
+  stacks: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  }
+});
 
 const ResultSlider = ({ data, color }) => {
   const [tapped, setTapped] = useState(0);
   const marks = data.reduce((accum, curr, i) => {
-    if (curr !== null) accum.push({ value: i, label: i });
+    let mark = { value: i };
+    if (i === 0) mark.label = i;
+    if (i === data.length - 1) mark.label = i;
+    if (curr !== null) accum.push(mark);
     return accum;
   }, []);
 
@@ -36,7 +38,7 @@ const ResultSlider = ({ data, color }) => {
     return getUntappedValue(numTapped - 1);
   };
 
-  const classes = useStyles({color});
+  const classes = useStyles({ color });
   return (
     <div className="result-slider">
       <div className={`${classes.stacks}`}>
@@ -57,11 +59,10 @@ const ResultSlider = ({ data, color }) => {
         className={`${classes.slider}`}
         defaultValue={0}
         marks={marks}
-        valueLabelDisplay="off"
+        valueLabelDisplay="auto"
         max={marks[marks.length - 1].value}
         onChange={handleChange}
       />
-
     </div>
   );
 };
