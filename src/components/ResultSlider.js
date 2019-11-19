@@ -43,12 +43,13 @@ const ResultSlider = ({ data, color }) => {
     <div className="result-slider">
       <div className={`${classes.stacks}`}>
         <div>
-          <p>Tapped: {tapped}</p>
-          <ColorDot color={color} shape="tapped" count={tapped} />
+          <p>Tapped</p>
+          <ColorDot stack="true" color={color} shape="tapped" count={tapped} />
         </div>
         <div>
-          <p>Untapped: {getUntappedValue(tapped)}</p>
+          <p>Untapped</p>
           <ColorDot
+            stack="true"
             color={color}
             shape="untapped"
             count={getUntappedValue(tapped)}
