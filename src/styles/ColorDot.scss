@@ -24,14 +24,16 @@
 }
 
 .stack {
-  display: inline-block;
+  display: inline-flex;
   position: relative;
+  align-items: center;
 }
 
-.invisible > * {
+.noCards {
   border: dashed rgb(21, 11, 0) 0.15rem;
   color: transparent;
-  background-color: transparent;
+  background-color: transparent !important;
+  background: none !important;
 }
 
 .second {
@@ -44,4 +46,12 @@
   position: absolute;
   top: 0.6rem;
   left: 0.6rem;
+}
+
+.moreThan3 {
+  color: gray;
+  font-weight: 900;
+  margin-left: 0.5rem;
+  font-size: 1.25rem;
+  width: 2rem;
 }
