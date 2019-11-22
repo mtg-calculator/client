@@ -1,6 +1,7 @@
 import React from 'react';
 import ResultSlider from './ResultSlider';
 import ColorDot from './ColorDot';
+import '../styles/ResultForm.scss';
 
 const ResultForm = ({ results, onReset }) => {
   console.log('Server response: ', results);
@@ -26,7 +27,6 @@ const ResultForm = ({ results, onReset }) => {
 
   return (
     <section>
-      <div>{items}</div>
       {Object.keys(results).map(result => (
         <ResultSlider
           data={results[result]}
@@ -34,7 +34,9 @@ const ResultForm = ({ results, onReset }) => {
           key={result.color}
         />
       ))}
-      <button onClick={onReset}>Reset</button>
+      <button className="buttonReset" onClick={onReset}>
+        Reset
+      </button>
     </section>
   );
 };

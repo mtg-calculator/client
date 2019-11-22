@@ -24,11 +24,13 @@ const InputForm = props => {
   const handleColorClick = event => {
     const { color } = event.target.dataset;
     console.log(color);
-    if (!colors[color]) {
-      setColors({
-        ...colors,
-        [color]: { sources: 1, turn: 1 }
-      });
+    if (color) {
+      if (!colors[color]) {
+        setColors({
+          ...colors,
+          [color]: { sources: 1, turn: 1 }
+        });
+      }
     }
   };
 

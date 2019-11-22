@@ -1,17 +1,18 @@
+h3 {
+  margin: 0;
+  text-align: left;
+}
+
 .deck-size-selector {
   display: flex;
   align-items: center;
   margin: 0;
 
-  h3 {
-    margin: 0 1rem;
-  }
-
-  input[type=radio] {
+  input[type='radio'] {
     display: none;
   }
 
-  input[type=radio] + label {
+  input[type='radio'] + label {
     display: inline-block;
     // margin: -20px;
     padding: 0.5rem 3rem;
@@ -21,7 +22,7 @@
     border: solid 1px green;
   }
 
-  input[type=radio]:checked + label {
+  input[type='radio']:checked + label {
     background-image: none;
     background-color: #555;
     color: #eee;
