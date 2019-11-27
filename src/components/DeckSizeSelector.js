@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/DeckSizeSelector.scss';
-import ErrorMessage from './ErrorMessage';
+import Grid from '@material-ui/core/Grid';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+// import '../styles/DeckSizeSelector.scss';
+// import ErrorMessage from './ErrorMessage';
 
 const DeckSizeSelector = ({ onChange, showError }) => {
   const [deckSize, setDeckSize] = useState(60);
 
-  const handleOptionChange = event => {
+  const handleChange = event => {
+    console.log(event.target.value)
     setDeckSize(+event.target.value);
   };
   useEffect(() => {
@@ -13,39 +20,31 @@ const DeckSizeSelector = ({ onChange, showError }) => {
   }, [onChange, deckSize]);
 
   return (
-    <div className="input-wrapper">
-      <h3>Deck Size</h3>
-      <div className="deck-size-selector">
-        <input
-          type="radio"
-          id="40-deck"
-          name="deck-size"
-          value="40"
-          checked={deckSize === 40}
-          onChange={handleOptionChange}
-        />
-        <label htmlFor="40-deck">40</label>
-        <input
-          type="radio"
-          id="60-deck"
-          name="deck-size"
-          value="60"
-          checked={deckSize === 60}
-          onChange={handleOptionChange}
-        />
-        <label htmlFor="60-deck">60</label>
-        <input
-          type="radio"
-          id="100-deck"
-          name="deck-size"
-          value="100"
-          checked={deckSize === 100}
-          onChange={handleOptionChange}
-        />
-        <label htmlFor="100-deck">100</label>
-      </div>
-      <ErrorMessage msg="Must select a deck size" showError={showError} />
-    </div>
+      <Grid className="deck-size-selector" xs={12}>
+        <FormControl>
+          <FormLabel>Deck Size</FormLabel>
+          <RadioGroup name="deck-size" value={deckSize} onChange={handleChange} row>
+            <FormControlLabel
+              value="40"
+              control={<Radio checked={deckSize === 40} color='primary' />}
+              label="40"
+              labelPlacement="end">
+            </FormControlLabel>
+            <FormControlLabel
+              value="60"
+              control={<Radio checked={deckSize === 60} color='primary' />}
+              label="60"
+              labelPlacement="end">
+            </FormControlLabel>
+            <FormControlLabel
+              value="100"
+              control={<Radio checked={deckSize === 100} color='primary' />}
+              label="100"
+              labelPlacement="end">
+            </FormControlLabel>
+          </RadioGroup>
+        </FormControl>
+      </Grid>
   );
 };
 
