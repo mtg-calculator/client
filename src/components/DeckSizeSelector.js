@@ -1,50 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import { Grid, Chip } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 // import '../styles/DeckSizeSelector.scss';
 // import ErrorMessage from './ErrorMessage';
 
+const useStyles = makeStyles(theme => ({
+  chip: {
+    padding: theme.spacing(0.5),
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  }
+}))
+
 const DeckSizeSelector = ({ onChange, showError }) => {
+  const classes = useStyles();
   const [deckSize, setDeckSize] = useState(60);
 
-  const handleChange = event => {
-    console.log(event.target.value)
-    setDeckSize(+event.target.value);
+  const handleChange = value => {
+    setDeckSize(value);
   };
+
   useEffect(() => {
     onChange(deckSize);
   }, [onChange, deckSize]);
 
+  const chipData = [
+    { key: 40, value: 40},
+    { key: 60, value: 60},
+    { key: 100, value: 100},
+  ]
+
   return (
-      <Grid className="deck-size-selector" xs={12}>
-        <FormControl>
-          <FormLabel>Deck Size</FormLabel>
-          <RadioGroup name="deck-size" value={deckSize} onChange={handleChange} row>
-            <FormControlLabel
-              value="40"
-              control={<Radio checked={deckSize === 40} color='primary' />}
-              label="40"
-              labelPlacement="end">
-            </FormControlLabel>
-            <FormControlLabel
-              value="60"
-              control={<Radio checked={deckSize === 60} color='primary' />}
-              label="60"
-              labelPlacement="end">
-            </FormControlLabel>
-            <FormControlLabel
-              value="100"
-              control={<Radio checked={deckSize === 100} color='primary' />}
-              label="100"
-              labelPlacement="end">
-            </FormControlLabel>
-          </RadioGroup>
-        </FormControl>
-      </Grid>
+    <Grid className="deck-size-selector" xs={12}>
+      <h3>Deck Size</h3>
+      {chipData.map(chip => <Chip
+        key={chip.key}
+        className={classes.chip}
+        label={chip.value}
+        clickable
+        onClick={() => handleChange(chip.value)}
+        color={deckSize === chip.value ? 'primary' : 'default'}
+      />)}
+    </Grid>
+
   );
 };
 
