@@ -1,7 +1,7 @@
 import React from 'react';
 import ColorButton from './ColorButton';
 import ErrorMessage from './ErrorMessage';
-import {COLORS, COLOR_CODES} from '../colors.js';
+import {COLORS} from '../colors.js';
 
 const ColorsSelector = ({handleColorClick, errors, submitted}) => {
 
@@ -9,7 +9,7 @@ const ColorsSelector = ({handleColorClick, errors, submitted}) => {
     <div className="input-wrapper">
       <h3>Color Selectors</h3>
       <div className="color-btns">
-        { COLORS.map(color =>  <ColorButton color={COLOR_CODES[color]} handleClick={handleColorClick} key={color} />
+        { COLORS.map(color =>  <ColorButton color={color} handleClick={handleColorClick} key={color} />
         )}
         </div>
       <ErrorMessage showError={errors.noColors && submitted} msg="At least one color must be selected"/>

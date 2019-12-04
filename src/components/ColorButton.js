@@ -1,7 +1,7 @@
 import React from 'react';
 import { Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import ColorDot from './ColorDot';
+import {COLOR_CODES} from '../colors.js';
 import '../styles/ColorButton.scss';
 
 const useStyles = makeStyles(theme => ({
@@ -16,9 +16,8 @@ const ColorButton = props => {
 
   const classes = useStyles();
   return (
-      <div className={classes.colorBtn} onClick={props.handleClick} >
-        <Fab variant='contained' size='small' style={{backgroundColor: props.color}}></Fab>
-        {/* <ColorDot color={props.color} /> */}
+      <div className={classes.colorBtn} onClick={props.handleClick}>
+        <Fab size='small' style={{backgroundColor: COLOR_CODES[props.color]}} ><p color={props.color} ></p></Fab>
       </div>
     )
 
