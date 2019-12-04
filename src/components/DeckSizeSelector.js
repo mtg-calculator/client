@@ -38,6 +38,7 @@ const DeckSizeSelector = ({ onChange, showError }) => {
         className={classes.chip}
         label={chip.value}
         clickable
+        variant='outlined'
         onClick={() => handleChange(chip.value)}
         color={deckSize === chip.value ? 'primary' : 'default'}
       />)}
