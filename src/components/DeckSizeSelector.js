@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Chip } from '@material-ui/core';
+import { Grid, Chip, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // import '../styles/DeckSizeSelector.scss';
 // import ErrorMessage from './ErrorMessage';
@@ -32,7 +32,9 @@ const DeckSizeSelector = ({ onChange, showError }) => {
 
   return (
     <Grid className="deck-size-selector" xs={12}>
-      <h3>Deck Size</h3>
+      <Typography variant="h6">
+        Deck Size
+      </Typography>
       {chipData.map(chip => <Chip
         key={chip.key}
         className={classes.chip}

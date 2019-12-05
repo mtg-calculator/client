@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ColorDot from './ColorDot';
-import Slider from '@material-ui/core/Slider';
+import { Slider, Typography } from '@material-ui/core';
 import '../styles/ResultSlider.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import { COLOR_CODES } from '../colors.js';
@@ -43,11 +43,11 @@ const ResultSlider = ({ data, color }) => {
     <div className="result-slider">
       <div className={`${classes.stacks}`}>
         <div>
-          <p>Tapped</p>
+          <Typography>Tapped</Typography>
           <ColorDot stack="true" color={color} shape="tapped" count={tapped} />
         </div>
         <div>
-          <p>Untapped</p>
+          <Typography>Untapped</Typography>
           <ColorDot
             stack="true"
             color={color}
