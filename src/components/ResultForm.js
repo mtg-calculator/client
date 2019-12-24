@@ -27,7 +27,7 @@ const ResultForm = ({ results, onReset }) => {
   });
 
   return (
-    <section>
+    <section className="resultForm">
       {Object.keys(results).map(result => (
         <ResultSlider
           data={results[result]}
