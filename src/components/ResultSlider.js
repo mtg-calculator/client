@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ColorDot from './ColorDot';
-import Slider from '@material-ui/core/Slider';
+import { Slider, Typography } from '@material-ui/core';
 import '../styles/ResultSlider.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import { COLOR_CODES } from '../colors.js';
@@ -12,7 +12,10 @@ const useStyles = makeStyles({
   }),
   stacks: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+  },
+  label: {
+    textAlign: 'left',
   }
 });
 
@@ -41,13 +44,13 @@ const ResultSlider = ({ data, color }) => {
   const classes = useStyles({ color });
   return (
     <div className="result-slider">
-      <div className={`${classes.stacks}`}>
+      <div className={classes.stacks}>
         <div>
-          <p>Tapped</p>
+          <Typography className={classes.label}>Tapped</Typography>
           <ColorDot stack="true" color={color} shape="tapped" count={tapped} />
         </div>
         <div>
-          <p>Untapped</p>
+          <Typography className={classes.label}>Untapped</Typography>
           <ColorDot
             stack="true"
             color={color}
@@ -57,7 +60,7 @@ const ResultSlider = ({ data, color }) => {
         </div>
       </div>
       <Slider
-        className={`${classes.slider}`}
+        className={classes.slider}
         defaultValue={0}
         marks={marks}
         valueLabelDisplay="auto"

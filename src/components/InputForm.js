@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, CircularProgress } from '@material-ui/core';
 import DeckSizeSelector from './DeckSizeSelector';
 import ColorsSelector from './ColorsSelector';
 import LandInputsField from './LandInputsField';
@@ -22,8 +23,7 @@ const InputForm = props => {
   };
 
   const handleColorClick = event => {
-    const { color } = event.target.dataset;
-    console.log(color);
+    const color = event.target.childNodes[0].getAttribute('color')
     if (color) {
       if (!colors[color]) {
         setColors({
@@ -82,7 +82,7 @@ const InputForm = props => {
   return (
     <form className="input-form" onSubmit={handleFormSubmit}>
       {loading ? (
-        <img className="loader" src="img/rainbowloading.gif" alt="Loading" />
+        <CircularProgress />
       ) : (
         <React.Fragment>
           <DeckSizeSelector
@@ -104,7 +104,8 @@ const InputForm = props => {
             submitted={submitted}
           />
 
-          <button className="submit">Submit</button>
+          {/* <button className="submit">Submit</button> */}
+          <Button className="submit" onClick={handleFormSubmit} variant="contained" color="primary">Submit</Button>
         </React.Fragment>
       )}
     </form>

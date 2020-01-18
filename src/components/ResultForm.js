@@ -1,5 +1,6 @@
 import React from 'react';
 import ResultSlider from './ResultSlider';
+import Button from '@material-ui/core/Button';
 import ColorDot from './ColorDot';
 import '../styles/ResultForm.scss';
 
@@ -26,7 +27,7 @@ const ResultForm = ({ results, onReset }) => {
   });
 
   return (
-    <section>
+    <section className="resultForm">
       {Object.keys(results).map(result => (
         <ResultSlider
           data={results[result]}
@@ -34,9 +35,14 @@ const ResultForm = ({ results, onReset }) => {
           key={result.color}
         />
       ))}
-      <button className="buttonReset" onClick={onReset}>
+      <Button
+        className="buttonReset"
+        variant="contained"
+        onClick={onReset}
+        color="primary"
+      >
         Reset
-      </button>
+      </Button>
     </section>
   );
 };

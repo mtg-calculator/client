@@ -1,6 +1,24 @@
-.App {
-  text-align: center;
+html {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  height: 100%;
+  width: 100%;
 }
+
+body {
+  flex-grow: 1;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  background-color: #3f51b5;
+}
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -22,6 +40,8 @@
 .App-link {
   color: #61dafb;
 }
+
+
 
 @keyframes App-logo-spin {
   from {
